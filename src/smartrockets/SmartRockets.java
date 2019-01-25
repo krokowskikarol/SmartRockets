@@ -22,61 +22,59 @@ import logic.Target;
  *
  * @author kroko
  */
-public class SmartRockets extends JComponent implements ActionListener{
+public class SmartRockets extends JComponent implements ActionListener {
 
-    
-    public Population pop = new Population(25);
+    public Population pop = new Population(25,200);
     public static Target tr = new Target();
-    int i = 1;
+
     String str;
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
         SmartRockets symulation = new SmartRockets();
-        
+
         JFrame window = new JFrame("Smart rockets");
         window.add(symulation);
         window.pack();
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setLocationRelativeTo(null);
         window.setVisible(true);
-       window.setBackground(Color.LIGHT_GRAY);
+        window.setBackground(Color.LIGHT_GRAY);
         window.add(tr);
-        
+
         Timer t = new Timer(50, symulation);
         t.start();
 
     }
 
-
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(800, 600);
-        
+
     }
 
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-       
 
         g2d.setColor(Color.RED);
-        g2d.drawString(""+pop.count, 50, 50);
-        g2d.drawString(""+pop.generation, 50, 65);
-        
+        g2d.drawString("" + pop.count, 50, 50);
+        g2d.drawString("" + pop.generation, 50, 65);
+
         for (int j = 0; j < pop.popSize; j++) {
             g2d.setColor(Color.BLACK);
             g2d.fill(pop.rockets[j].shape);
             g2d.setColor(Color.YELLOW);
             g2d.draw(pop.rockets[j].shape);
-            
+
         }
 
     }
 
-   /*
+    /*
 public void stateActualization(){
         
         
@@ -89,24 +87,23 @@ public void stateActualization(){
             }
         }
     }
-*/
-
-@Override
+     */
+    @Override
     public void actionPerformed(ActionEvent arg0) {
 
-        if(pop.isAlive()){
+        if (pop.isAlive()) {
             pop.update();
             repaint();
-            
-        }else{
-         //pop.createGenePool(pop.rockets);
-           // System.out.println(pop.matingPool.size());
-           // pop = new Population(pop, pop.matingPool);
-          // System.out.println("population size : " + pop.popSize);   
-        
-          pop = new Population(pop.popSize);
+
+        } else {
+            //pop.createGenePool(pop.rockets);
+            // System.out.println(pop.matingPool.size());
+            // pop = new Population(pop, pop.matingPool);
+            // System.out.println("population size : " + pop.popSize);   
+
+            pop = new Population(pop);
         }
-  /*     
+        /*     
 if (i < 200) {
 
             for (int j = 0; j < pop.popSize; j++) {
@@ -128,9 +125,7 @@ if (i < 200) {
             pop = new Population(pop, pop.matingPool);
            System.out.println("population size : " + pop.popSize);
         }
-*/
+         */
     }
 
-
-    
 }
