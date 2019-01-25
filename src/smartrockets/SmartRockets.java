@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package smartrockets_v1;
+package smartrockets;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,12 +15,14 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
+import logic.Population;
+import logic.Target;
 
 /**
  *
  * @author kroko
  */
-public class SmartRockets_v1 extends JComponent implements ActionListener{
+public class SmartRockets extends JComponent implements ActionListener{
 
     
     public Population pop = new Population(25);
@@ -32,7 +34,7 @@ public class SmartRockets_v1 extends JComponent implements ActionListener{
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        smartRockets symulation = new smartRockets();
+        SmartRockets symulation = new SmartRockets();
         
         JFrame window = new JFrame("Smart rockets");
         window.add(symulation);

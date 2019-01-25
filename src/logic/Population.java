@@ -10,14 +10,14 @@ package logic;
  * @author kroko
  */
 public class Population {
-    public int size,lifespan,count;
+    public int popSize,lifespan,count;
     Vector spawnPoint = new Vector(400, 500);
     public Rocket[] rockets;
 
-    public Population() {
-        size = 20;
-        rockets = new Rocket[size];
-        for (int i = 0; i < size; i++) {
+    public Population(int size) {
+        popSize = 20;
+        rockets = new Rocket[popSize];
+        for (int i = 0; i < popSize; i++) {
             rockets[i] = new Rocket(lifespan, spawnPoint);
         }
     }
