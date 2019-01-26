@@ -15,6 +15,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
+import logic.DNA;
 import logic.Population;
 import logic.Target;
 
@@ -24,7 +25,7 @@ import logic.Target;
  */
 public class SmartRockets extends JComponent implements ActionListener {
 
-    public Population pop = new Population(25,200);
+    public Population pop = new Population(25, 250);
     public static Target tr = new Target();
 
     String str;
@@ -63,8 +64,8 @@ public class SmartRockets extends JComponent implements ActionListener {
         g2d.setColor(Color.RED);
         g2d.drawString("" + pop.count, 50, 50);
         g2d.drawString("" + pop.generation, 50, 65);
-g2d.drawString("" + pop.rockets[0].position.x + "" + pop.rockets[0].position.y + ")", 50, 80);
-        g2d.drawString("(" + pop.rockets[5].position.x + ";" + pop.rockets[5].position.y+ ")", 50, 95);
+        g2d.drawString("" + pop.rockets[0].position.x + "" + pop.rockets[0].position.y + ")", 50, 80);
+//        g2d.drawString("(" + pop.rockets[5].position.x + ";" + pop.rockets[5].position.y + ")", 50, 95);
 
         for (int j = 0; j < pop.popSize; j++) {
             g2d.setColor(Color.BLACK);
@@ -76,58 +77,16 @@ g2d.drawString("" + pop.rockets[0].position.x + "" + pop.rockets[0].position.y +
 
     }
 
-    /*
-public void stateActualization(){
-        
-        
-            for (int j = 0; j < pop.popSize; j++) {
-                pop.rockets[j].conditionCheck(tr);
-                if(pop.rockets[j].isAlive){
-                pop.rockets[j].shape.x += pop.rockets[j].dna.genes[pop.rockets[j].count].getX();
-                pop.rockets[j].shape.y += pop.rockets[j].dna.genes[pop.rockets[j].count].getY();
-                pop.rockets[j].count +=1;
-            }
-        }
-    }
-     */
     @Override
     public void actionPerformed(ActionEvent arg0) {
 
-        if (pop.isAlive()) {
-            pop.update();
-            repaint();
-
-        } else {
-            //pop.createGenePool(pop.rockets);
-            // System.out.println(pop.matingPool.size());
-            // pop = new Population(pop, pop.matingPool);
-            // System.out.println("population size : " + pop.popSize);   
-
-            pop = new Population(pop);
+        pop.update();
+        for (int i = 0; i < pop.popSize; i++) {
+            System.out.println("rocket "+ i);
+            pop.rockets[i].showVelocity();
+            pop.rockets[i].position.display();
         }
-        /*     
-if (i < 200) {
+        repaint();
 
-            for (int j = 0; j < pop.popSize; j++) {
-        //        pop.rockets[j].conditionCheck(tr);
-        //    pop.rockets[j].shape.x += pop.rockets[j].dna.genes[i].getX();
-        //      pop.rockets[j].shape.y += pop.rockets[j].dna.genes[i].getY();
-            }
-        
-        
-            i++;
-            repaint();
-        }else{
-            i=1;
-            for (int j = 0; j < pop.popSize; j++) {
-                pop.rockets[j].validate(tr);
-            }
-            pop.createGenePool(pop.rockets);
-            System.out.println(pop.matingPool.size());
-            pop = new Population(pop, pop.matingPool);
-           System.out.println("population size : " + pop.popSize);
-        }
-         */
     }
-
 }

@@ -14,19 +14,18 @@ import java.util.Random;
  * @author kroko
  */
 public class Vector {
-    public int x,y,range;
-    
+    public int x,y;
+    Random random = new Random(); //optionally, you can specify a seed, e.g. timestamp.
 
     public Vector() {
-        int max = 1;
-    Random random = new Random(); //optionally, you can specify a seed, e.g. timestamp.
+        int max = 2;
+    
     
         x =  random.nextInt(max) * (random .nextBoolean() ? -1 : 1);
         y =  random.nextInt(max) * (random .nextBoolean() ? -1 : 1);
     }
 
     public Vector(int x, int y) {
-        range = 5;
         this.x = x;
         this.y = y;
     }
@@ -54,5 +53,7 @@ public class Vector {
     public void setY(int y) {
         this.y = y;
     }
-    
+    public void display(){
+        System.out.println("("+ x + ";"+ y +")");
+    }
 }

@@ -34,7 +34,7 @@ public class Population {
         popSize = pop.popSize;
         rockets = new Rocket[popSize];
         for (int i = 0; i < popSize; i++) {
-            rockets[i] = new Rocket(pop.rockets[0], createChildrenGenes());
+            rockets[i] = new Rocket(pop.rockets[i], createChildrenGenes());
         }
     }
 
@@ -55,8 +55,8 @@ public class Population {
     }
 
     public void update(){
-        for (Rocket rocket : rockets) {
-            rocket.update(count);
+        for (int i = 0; i < popSize; i++) {
+            rockets[i].update(count);
         }
         count++;
     }

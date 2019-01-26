@@ -31,8 +31,8 @@ public class DNA {
         return length;
     }
     public void showDNA(){
-            for (Vector gene : genes) {
-                System.out.println(gene.getX()+";;"+ gene.getY());
+            for (int i = 0 ; i < length; i++) {
+                System.out.println(genes[i].getX()+";;"+ genes[i].getY());
                 
             }
     }

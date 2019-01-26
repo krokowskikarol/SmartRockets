@@ -20,7 +20,7 @@ public class Rocket {
         dna = new DNA(lifeLength);
         position = spawnPoint;
         acceleration= new Vector(0,0); 
-        velocity= new Vector(0,0);
+        velocity= new Vector();
 
         shape = new Rectangle(position.getX(), position.getY(), 6, 15);
     }
@@ -33,15 +33,23 @@ public void applyForce(Vector gene){
     acceleration.add(gene);
 }
 public void update(int i){
-    applyForce(this.dna.getGene(i));
+    //applyForce(dna.genes[i]);
+    acceleration.clear();
+    acceleration.add(dna.getGene(i));
+    
     velocity.add(acceleration);
+    
     position.add(velocity);
     move();
     
-    acceleration.clear();
+    
 }
 private void move(){
-    shape.setLocation(position.getX(), position.getY());
+    shape.x += velocity.getX();
+    shape.y += velocity.getY();
 }
 
+public void showVelocity(){
+    velocity.display();
+}
 }
