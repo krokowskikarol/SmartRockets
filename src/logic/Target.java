@@ -8,6 +8,7 @@ package logic;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.util.Random;
 import javax.swing.JComponent;
 
@@ -18,19 +19,23 @@ import javax.swing.JComponent;
 public class Target extends JComponent {
 
     public int x, y, diagonal;
+    public Point center;
 
     public Target() {
         Random random = new Random();
-
         x = random.nextInt(700);
         y = random.nextInt(500);
         diagonal = 30;
+        center = new Point(this.x + diagonal / 2, this.y + diagonal / 2);
+
     }
 
     public Target(int x, int y, int diagonal) {
         this.x = x;
         this.y = y;
         this.diagonal = diagonal;
+        center = new Point(this.x + diagonal / 2, this.y + diagonal / 2);
+
     }
 
     @Override
@@ -50,12 +55,8 @@ public class Target extends JComponent {
 
     }
 
-    public int getCenterX() {
-        return this.x + diagonal / 2;
-    }
-
-    public int getCenterY() {
-        return this.y + diagonal / 2;
+    public Point getCenter() {
+        return center;
     }
 
 }

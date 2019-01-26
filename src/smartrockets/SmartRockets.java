@@ -17,6 +17,7 @@ import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import logic.DNA;
 import logic.Population;
+import logic.Rocket;
 import logic.Target;
 
 /**
@@ -25,7 +26,7 @@ import logic.Target;
  */
 public class SmartRockets extends JComponent implements ActionListener {
 
-    public Population pop = new Population(25, 250);
+    public Population pop = new Population(25, 150);
     public static Target tr = new Target();
 
     String str;
@@ -79,14 +80,22 @@ public class SmartRockets extends JComponent implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-
-        pop.update();
-        for (int i = 0; i < pop.popSize; i++) {
-            System.out.println("rocket " + i);
-            pop.rockets[i].showVelocity();
-            pop.rockets[i].position.display();
-        }
+        if (pop.isAlive()) {
+            pop.update(tr);
         repaint();
+        }
+        else{
+            
+            for (Rocket rocket : pop.rockets) {
+                rocket.evaluate(tr);
+                System.out.println("****************");
+                System.out.println("dystans");
+                System.out.println(rocket.checkDistance(tr));
+                System.out.println("fitness");
+                
+                System.out.println(rocket.fitness);
+            }
+        }
 
     }
 }

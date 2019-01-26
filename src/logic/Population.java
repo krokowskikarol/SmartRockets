@@ -54,9 +54,9 @@ public class Population {
         return parentA;
     }
 
-    public void update() {
+    public void update(Target target) {
         for (int i = 0; i < popSize; i++) {
-            rockets[i].update(count);
+            rockets[i].update(count, target);
         }
         count++;
     }
