@@ -18,33 +18,50 @@ public class Population {
     public Vector spawnPoint = new Vector(400, 500);
     public ArrayList<DNA> matingPool;
     public Rocket[] rockets;
+    
 
-    public Population(int size, int lifeLength) {
+    public Population(int size, int lifeLength, Target target) {
+        matingPool = new ArrayList<>();
         lifespan = lifeLength;
         popSize = size;
         rockets = new Rocket[popSize];
         for (int i = 0; i < popSize; i++) {
-            rockets[i] = new Rocket(lifespan, spawnPoint);
+            rockets[i] = new Rocket(lifespan, spawnPoint, target);
         }
     }
 
     public Population(Population pop) {
+        matingPool = new ArrayList<>();
         lifespan = pop.lifespan;
         generation = pop.generation + 1;
         popSize = pop.popSize;
         rockets = new Rocket[popSize];
         for (int i = 0; i < popSize; i++) {
-            rockets[i] = new Rocket(pop.rockets[i], createChildrenGenes());
+            rockets[i] = new Rocket(pop.rockets[i], pop.createChildrenGenes());
         }
     }
 
+    private void createMatingPool(){
+        matingPool.clear();
+        for (Rocket rocket : rockets) {
+            
+            rocket.evaluate();
+            
+            for (int i = 0; i < rocket.fitness; i++) {
+                matingPool.add(rocket.dna);
+            }
+        }
+        
+    }
     public DNA createChildrenGenes() {
+        createMatingPool();
+        
         Random random = new Random();
         DNA parentA = matingPool.get(random.nextInt(matingPool.size()));
         DNA parentB = matingPool.get(random.nextInt(matingPool.size()));
-        while (parentA == parentB) {
-            parentB = matingPool.get(random.nextInt(matingPool.size()));
-        }
+        //while (parentA == parentB) {
+        //    parentB = matingPool.get(random.nextInt(matingPool.size()));
+        //}
         for (int i = 0; i < parentA.getLength(); i++) {
 
             if (Math.random() < 0.5) {
@@ -54,9 +71,9 @@ public class Population {
         return parentA;
     }
 
-    public void update(Target target) {
+    public void update() {
         for (int i = 0; i < popSize; i++) {
-            rockets[i].update(count, target);
+            rockets[i].update(count);
         }
         count++;
     }
