@@ -29,6 +29,14 @@ public class Target extends JComponent {
         center = new Point(this.x + diagonal / 2, this.y + diagonal / 2);
 
     }
+     public Target(int radius) {
+        Random random = new Random();
+        x = random.nextInt(700);
+        y = random.nextInt(500);
+        diagonal = radius*2;
+        center = new Point(this.x + diagonal / 2, this.y + diagonal / 2);
+
+    }
 
     public Target(int x, int y, int diagonal) {
         this.x = x;

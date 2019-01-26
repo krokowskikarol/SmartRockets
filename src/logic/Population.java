@@ -59,14 +59,15 @@ public class Population {
         Random random = new Random();
         DNA parentA = matingPool.get(random.nextInt(matingPool.size()));
         DNA parentB = matingPool.get(random.nextInt(matingPool.size()));
-        //while (parentA == parentB) {
-        //    parentB = matingPool.get(random.nextInt(matingPool.size()));
-        //}
-        for (int i = 0; i < parentA.getLength(); i++) {
+        int n = 0;
+        while (parentA == parentB && n < 5 ) {
+            parentB = matingPool.get(random.nextInt(matingPool.size()));
+            n++;
+        }
+        
+        for (int i = random.nextInt(parentA.getLength()); i < parentA.getLength(); i++) {
 
-            if (Math.random() < 0.5) {
                 parentA.genes[i] = parentB.genes[i];
-            }
         }
         return parentA;
     }

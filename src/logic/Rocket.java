@@ -65,14 +65,14 @@ public class Rocket {
 
     public void evaluate() {
         if (checkIfHitTarget()) {
-            this.fitness = 100;
+            this.fitness = 10;
         } else {
             this.fitness += (int) normalize();
         }
     }
 
     private double normalize() {
-        double i = (1.0 / checkDistance()) * 10000;
+        double i = (1.0 / checkDistance()) * 1000;
         return i;
     }
 

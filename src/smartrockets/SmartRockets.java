@@ -27,8 +27,8 @@ import logic.Target;
 public class SmartRockets extends JComponent implements ActionListener {
 
   
-    public static Target tr = new Target();
-  public Population pop = new Population(50, 100,tr);
+    public static Target tr = new Target(50);
+  public Population pop = new Population(100, 120,tr);
     String str;
 
     /**
@@ -85,9 +85,9 @@ public class SmartRockets extends JComponent implements ActionListener {
         repaint();
         }
         else{
-            Population n = pop;
+            
            
-            pop = new Population(n);
+            pop = new Population(pop);
             /*
             for (Rocket rocket : pop.rockets) {
                 rocket.evaluate();
