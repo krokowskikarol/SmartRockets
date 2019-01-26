@@ -7,22 +7,20 @@ package logic;
 
 import java.util.Random;
 
-
-
 /**
  *
  * @author kroko
  */
 public class Vector {
-    public int x,y;
+
+    public int x, y;
     Random random = new Random(); //optionally, you can specify a seed, e.g. timestamp.
 
     public Vector() {
         int max = 2;
-    
-    
-        x =  random.nextInt(max) * (random .nextBoolean() ? -1 : 1);
-        y =  random.nextInt(max) * (random .nextBoolean() ? -1 : 1);
+
+        x = random.nextInt(max) * (random.nextBoolean() ? -1 : 1);
+        y = random.nextInt(max) * (random.nextBoolean() ? -1 : 1);
     }
 
     public Vector(int x, int y) {
@@ -30,14 +28,16 @@ public class Vector {
         this.y = y;
     }
 
-    public void add(Vector vector){
+    public void add(Vector vector) {
         x += vector.getX();
         y += vector.getY();
     }
-    public void clear(){
+
+    public void clear() {
         x = 0;
-        y=0;
+        y = 0;
     }
+
     public int getX() {
         return x;
     }
@@ -53,7 +53,8 @@ public class Vector {
     public void setY(int y) {
         this.y = y;
     }
-    public void display(){
-        System.out.println("("+ x + ";"+ y +")");
+
+    public void display() {
+        System.out.println("(" + x + ";" + y + ")");
     }
 }

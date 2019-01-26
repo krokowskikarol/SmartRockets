@@ -46,7 +46,7 @@ public class SmartRockets extends JComponent implements ActionListener {
         window.setBackground(Color.LIGHT_GRAY);
         window.add(tr);
 
-        Timer t = new Timer(150, symulation);
+        Timer t = new Timer(60, symulation);
         t.start();
 
     }
@@ -82,7 +82,7 @@ public class SmartRockets extends JComponent implements ActionListener {
 
         pop.update();
         for (int i = 0; i < pop.popSize; i++) {
-            System.out.println("rocket "+ i);
+            System.out.println("rocket " + i);
             pop.rockets[i].showVelocity();
             pop.rockets[i].position.display();
         }

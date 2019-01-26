@@ -21,19 +21,21 @@ public class DNA {
         for (int i = 0; i < length; i++) {
             genes[i] = new Vector();
         }
-        
+
     }
 
-    public Vector getGene(int i){
+    public Vector getGene(int i) {
         return genes[i];
     }
+
     public int getLength() {
         return length;
     }
-    public void showDNA(){
-            for (int i = 0 ; i < length; i++) {
-                System.out.println(genes[i].getX()+";;"+ genes[i].getY());
-                
-            }
+
+    public void showDNA() {
+        for (int i = 0; i < length; i++) {
+            System.out.println(genes[i].getX() + ";;" + genes[i].getY());
+
+        }
     }
 }
