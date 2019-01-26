@@ -54,6 +54,12 @@ public class Population {
         return parentA;
     }
 
+    public void update(){
+        for (Rocket rocket : rockets) {
+            rocket.update(count);
+        }
+        count++;
+    }
     public boolean isAlive() {
         return count < lifespan;
     }

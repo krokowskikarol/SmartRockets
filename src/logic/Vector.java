@@ -18,14 +18,15 @@ public class Vector {
     
 
     public Vector() {
-        range = 2;
+        int max = 1;
     Random random = new Random(); //optionally, you can specify a seed, e.g. timestamp.
     
-        x =  random.nextInt(range) * (random .nextBoolean() ? -1 : 1);
-        y =  random.nextInt(range) * (random .nextBoolean() ? -1 : 1);
+        x =  random.nextInt(max) * (random .nextBoolean() ? -1 : 1);
+        y =  random.nextInt(max) * (random .nextBoolean() ? -1 : 1);
     }
 
     public Vector(int x, int y) {
+        range = 5;
         this.x = x;
         this.y = y;
     }
@@ -33,6 +34,10 @@ public class Vector {
     public void add(Vector vector){
         x += vector.getX();
         y += vector.getY();
+    }
+    public void clear(){
+        x = 0;
+        y=0;
     }
     public int getX() {
         return x;

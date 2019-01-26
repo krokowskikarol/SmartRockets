@@ -24,9 +24,16 @@ public class DNA {
         
     }
 
-    
+    public Vector getGene(int i){
+        return genes[i];
+    }
     public int getLength() {
         return length;
     }
-
+    public void showDNA(){
+            for (Vector gene : genes) {
+                System.out.println(gene.getX()+";;"+ gene.getY());
+                
+            }
+    }
 }

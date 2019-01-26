@@ -45,7 +45,7 @@ public class SmartRockets extends JComponent implements ActionListener {
         window.setBackground(Color.LIGHT_GRAY);
         window.add(tr);
 
-        Timer t = new Timer(50, symulation);
+        Timer t = new Timer(150, symulation);
         t.start();
 
     }
@@ -63,6 +63,8 @@ public class SmartRockets extends JComponent implements ActionListener {
         g2d.setColor(Color.RED);
         g2d.drawString("" + pop.count, 50, 50);
         g2d.drawString("" + pop.generation, 50, 65);
+g2d.drawString("" + pop.rockets[0].position.x + "" + pop.rockets[0].position.y + ")", 50, 80);
+        g2d.drawString("(" + pop.rockets[5].position.x + ";" + pop.rockets[5].position.y+ ")", 50, 95);
 
         for (int j = 0; j < pop.popSize; j++) {
             g2d.setColor(Color.BLACK);
