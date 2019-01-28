@@ -21,27 +21,36 @@ public class Rocket {
 
     public Rocket(int lifeLength, Vector spawnPoint, Target tar) {
         target = tar;
-        this.fitness = 1;
+        this.fitness = 0;
         this.isAlive = true;
         dna = new DNA(lifeLength);
         position = spawnPoint;
         acceleration = new Vector(0, 0);
-        velocity = new Vector(0, -2);
+        velocity = new Vector(0,0);
 
-        shape = new Rectangle(position.getX(), position.getY(), 6, 15);
+        shape = new Rectangle(position.getX(), position.getY(), 4, 15);
     }
 
     public Rocket(Rocket parent, DNA parentsGenes) {
-        this.fitness = 1;
+        this.fitness = 0;
         this.isAlive = true;
         this.target = parent.target;
         dna = parentsGenes;
+       // mutate();
         position = parent.position;
-        shape = new Rectangle(position.getX(), position.getY(), 6, 15);
+        shape = new Rectangle(position.getX(), position.getY(), 4, 15);
         acceleration = new Vector(0, 0);
-        velocity = new Vector(0, -2);
+        velocity = new Vector(0,0);
     }
 
+    private void mutate(){
+        for (int i = 0; i < this.dna.getLength(); i++){
+            if(Math.random()<0.01){
+                this.dna.genes[i] = new Vector();
+                System.out.println("mutacja");
+            }
+        }
+    }
     public void applyForce(Vector gene) {
         acceleration.add(gene);
     }
@@ -54,6 +63,7 @@ public class Rocket {
 
             velocity.add(acceleration);
             move();
+            evaluate();
         }
     }
 
@@ -64,13 +74,16 @@ public class Rocket {
     }
 
     public void evaluate() {
-        if (checkIfHitTarget()) {
-            this.fitness = 10;
-        } else {
-            this.fitness += (int) normalize();
-        }
+                                           if(fitness<100){
+                                       if (checkIfHitTarget()) {
+                                           this.fitness = 100;
+                                         } else {
+            int check = (int) normalize();
+            if(fitness<check){
+                fitness = check;
+            }
     }
-
+    }}
     private double normalize() {
         double i = (1.0 / checkDistance()) * 1000;
         return i;
@@ -87,8 +100,8 @@ public class Rocket {
 
     public int checkDistance() {
         int a, b, c;
-        a = (int) (target.getCenter().getX() - this.getWarhead().getX());
-        b = (int) (target.getCenter().getY() - this.getWarhead().getY());
+        a = (int) (this.target.getCenter().getX() - this.getWarhead().getX());
+        b = (int) (this.target.getCenter().getY() - this.getWarhead().getY());
 
         c = (int) Math.sqrt((a * a) + (b * b));
         return c;

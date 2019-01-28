@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JComponent;
@@ -27,9 +28,10 @@ import logic.Target;
 public class SmartRockets extends JComponent implements ActionListener {
 
   
-    public static Target tr = new Target(50);
-  public Population pop = new Population(100, 120,tr);
+    public static Target tr = new Target(30);
+  public Population pop = new Population(100, 60,tr);
     String str;
+    public int statFit;
 
     /**
      * @param args the command line arguments
@@ -66,26 +68,32 @@ public class SmartRockets extends JComponent implements ActionListener {
         g2d.drawString("" + pop.count, 50, 50);
         g2d.drawString("" + pop.generation, 50, 65);
         g2d.drawString("" + pop.rockets[0].position.x + "" + pop.rockets[0].position.y + ")", 50, 80);
-//        g2d.drawString("(" + pop.rockets[5].position.x + ";" + pop.rockets[5].position.y + ")", 50, 95);
-
-        for (int j = 0; j < pop.popSize; j++) {
+        g2d.drawString("how many hit : " + pop.checkHowManyHit() + "/" + pop.popSize, 50, 95);
+        g2d.drawString("r1 fit : " + pop.rockets[0].fitness, 50, 110);
+        
+        
+        
+        for (int j = 1; j < pop.popSize; j++) {
             g2d.setColor(Color.BLACK);
             g2d.fill(pop.rockets[j].shape);
             g2d.setColor(Color.YELLOW);
             g2d.draw(pop.rockets[j].shape);
 
         }
-
+        g2d.setColor(Color.MAGENTA);
+            g2d.fill(pop.rockets[0].shape);
     }
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
         if (pop.isAlive()) {
             pop.update();
+            
         repaint();
         }
         else{
-            
+            pop.calculatePopFit();
+            statFit = pop.midFit;    //przerobic calculate aby zwracalo int
            
             pop = new Population(pop);
             /*

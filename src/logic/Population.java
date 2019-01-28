@@ -14,7 +14,7 @@ import java.util.Random;
  */
 public class Population {
 
-    public int popSize, lifespan, count = 0, generation = 1;
+    public int popSize, lifespan,midFit = 0, count = 0, generation = 1;
     public Vector spawnPoint = new Vector(400, 500);
     public ArrayList<DNA> matingPool;
     public Rocket[] rockets;
@@ -37,7 +37,7 @@ public class Population {
         popSize = pop.popSize;
         rockets = new Rocket[popSize];
         for (int i = 0; i < popSize; i++) {
-            rockets[i] = new Rocket(pop.rockets[i], pop.createChildrenGenes());
+            rockets[i] = new Rocket(pop.rockets[0], pop.createChildrenGenes());
         }
     }
 
@@ -45,7 +45,7 @@ public class Population {
         matingPool.clear();
         for (Rocket rocket : rockets) {
             
-            rocket.evaluate();
+            
             
             for (int i = 0; i < rocket.fitness; i++) {
                 matingPool.add(rocket.dna);
@@ -59,16 +59,12 @@ public class Population {
         Random random = new Random();
         DNA parentA = matingPool.get(random.nextInt(matingPool.size()));
         DNA parentB = matingPool.get(random.nextInt(matingPool.size()));
-        int n = 0;
-        while (parentA == parentB && n < 5 ) {
-            parentB = matingPool.get(random.nextInt(matingPool.size()));
-            n++;
-        }
+        for (int i =random.nextInt(parentA.getLength()); i < parentA.getLength(); i++) {
         
-        for (int i = random.nextInt(parentA.getLength()); i < parentA.getLength(); i++) {
-
-                parentA.genes[i] = parentB.genes[i];
-        }
+                 parentA.genes[i] = parentB.genes[i];
+        
+    }
+        
         return parentA;
     }
 
@@ -81,5 +77,20 @@ public class Population {
 
     public boolean isAlive() {
         return count < lifespan;
+    }
+    public void calculatePopFit(){
+        int mid = 0;
+        for (Rocket rocket : rockets) {
+            mid += rocket.fitness;
+        }
+        midFit = mid/popSize;
+    }
+    public int checkHowManyHit(){
+        int i = 0;
+        for (Rocket rocket : rockets) {
+            if(rocket.fitness == 100) i++;
+        }
+        return i;
+        
     }
 }
