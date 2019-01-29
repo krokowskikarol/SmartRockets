@@ -5,6 +5,7 @@
  */
 package logic;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -14,14 +15,16 @@ import java.util.Random;
  */
 public class Population {
 
-    public int popSize, lifespan,midFit = 0, count = 0, generation = 1;
-    public Vector spawnPoint = new Vector(400, 500);
-    public ArrayList<DNA> matingPool;
-    public Rocket[] rockets;
+    private int count = 0;
+    private final int popSize, lifespan, generation;
+    private final Vector spawnPoint = new Vector(400, 500);
+    private final ArrayList<DNA> matingPool;
+    private final Rocket[] rockets;
     
 
     public Population(int size, int lifeLength, Target target) {
         matingPool = new ArrayList<>();
+        generation = 1;
         lifespan = lifeLength;
         popSize = size;
         rockets = new Rocket[popSize];
@@ -47,8 +50,8 @@ public class Population {
             
             
             
-            for (int i = 0; i < rocket.fitness; i++) {
-                matingPool.add(rocket.dna);
+            for (int i = 0; i < rocket.getFitness(); i++) {
+                matingPool.add(rocket.getDna());
             }
         }
         
@@ -61,7 +64,7 @@ public class Population {
         DNA parentB = matingPool.get(random.nextInt(matingPool.size()));
         for (int i =random.nextInt(parentA.getLength()); i < parentA.getLength(); i++) {
         
-                 parentA.genes[i] = parentB.genes[i];
+                 parentA.setGene(i, parentB.getGene(i));
         
     }
         
@@ -78,19 +81,32 @@ public class Population {
     public boolean isAlive() {
         return count < lifespan;
     }
-    public void calculatePopFit(){
-        int mid = 0;
-        for (Rocket rocket : rockets) {
-            mid += rocket.fitness;
-        }
-        midFit = mid/popSize;
-    }
+    
     public int checkHowManyHit(){
         int i = 0;
         for (Rocket rocket : rockets) {
-            if(rocket.fitness == 100) i++;
+            if(rocket.getFitness() == 100) i++;
         }
         return i;
-        
     }
+
+    public Rectangle getRocketShape(int i) {
+        return rockets[i].getShape();
+    }
+
+    public int getPopSize() {
+        return popSize;
+    }
+    public int getRocketFitness(int i) {
+        return rockets[i].getFitness();
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public int getGeneration() {
+        return generation;
+    }
+    
 }

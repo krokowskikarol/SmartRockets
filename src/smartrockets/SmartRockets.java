@@ -27,9 +27,8 @@ import logic.Target;
  */
 public class SmartRockets extends JComponent implements ActionListener {
 
-  
     public static Target tr = new Target(30);
-  public Population pop = new Population(100, 60,tr);
+    public Population pop = new Population(100, 60, tr);
     String str;
     public int statFit;
 
@@ -64,50 +63,46 @@ public class SmartRockets extends JComponent implements ActionListener {
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
-        g2d.setColor(Color.RED);
-        g2d.drawString("" + pop.count, 50, 50);
-        g2d.drawString("" + pop.generation, 50, 65);
-        g2d.drawString("" + pop.rockets[0].position.x + "" + pop.rockets[0].position.y + ")", 50, 80);
-        g2d.drawString("how many hit : " + pop.checkHowManyHit() + "/" + pop.popSize, 50, 95);
-        g2d.drawString("r1 fit : " + pop.rockets[0].fitness, 50, 110);
+    
+        drawStatisstics(g2d);
+        drawPopulation(g2d);
         
-        
-        
-        for (int j = 1; j < pop.popSize; j++) {
-            g2d.setColor(Color.BLACK);
-            g2d.fill(pop.rockets[j].shape);
-            g2d.setColor(Color.YELLOW);
-            g2d.draw(pop.rockets[j].shape);
-
-        }
+        // śledzenie jednej arbitralnie wybranej rakiety 
+        //(rakiety zaczynają sie nakładać na siebie z czasem)
         g2d.setColor(Color.MAGENTA);
-            g2d.fill(pop.rockets[0].shape);
+        g2d.fill(pop.getRocketShape(0));
     }
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
         if (pop.isAlive()) {
             pop.update();
-            
-        repaint();
-        }
-        else{
-            pop.calculatePopFit();
-            statFit = pop.midFit;    //przerobic calculate aby zwracalo int
-           
-            pop = new Population(pop);
-            /*
-            for (Rocket rocket : pop.rockets) {
-                rocket.evaluate();
-                System.out.println("****************");
-                System.out.println("dystans");
-                System.out.println(rocket.checkDistance());
-                System.out.println("fitness");
-                
-                System.out.println(rocket.fitness);
-            }
-            */
-        }
 
+            repaint();
+        } else {
+            pop = new Population(pop);
+        }
+}
+    public void drawStatisstics(Graphics2D g2d){
+        g2d.setColor(Color.RED);
+        g2d.drawString("Step : " + pop.getCount(), 50, 50);
+        g2d.drawString("Generation : " + pop.getGeneration(), 50, 65);
+        g2d.drawString("Rockets that hit target : " + pop.checkHowManyHit() + "/" + pop.getPopSize(), 50, 95);
+        g2d.drawString("rocket 0 fitness : " + pop.getRocketFitness(0), 50, 110);
+
+    }
+    public void drawPopulation(Graphics2D g2d){
+        int alpha = 127;
+        Color back = new Color(0, 0, 0, alpha);
+        Color border = new Color(225, 225, 0, alpha/2);
+        for (int j = 1; j < pop.getPopSize(); j++) {
+            
+            g2d.setColor(back);
+            g2d.fill(pop.getRocketShape(j));
+            g2d.setColor(border);
+            g2d.draw(pop.getRocketShape(j));
+
+        }
+        
     }
 }

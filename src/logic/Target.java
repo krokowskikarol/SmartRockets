@@ -18,8 +18,8 @@ import javax.swing.JComponent;
  */
 public class Target extends JComponent {
 
-    public int x, y, diagonal;
-    public Point center;
+    private final int x, y, diagonal;
+    private final Point center;
 
     public Target() {
         Random random = new Random();
@@ -66,5 +66,7 @@ public class Target extends JComponent {
     public Point getCenter() {
         return center;
     }
-
+    public int getRadius(){
+        return diagonal/2;
+    }
 }

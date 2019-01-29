@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class Vector {
 
-    public int x, y;
+    private int x, y;
     Random random = new Random(); //optionally, you can specify a seed, e.g. timestamp.
 
     public Vector() {

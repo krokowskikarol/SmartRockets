@@ -11,9 +11,8 @@ package logic;
  */
 public class DNA {
 
-    public int length;
-    public Vector[] genes;
-
+    private final int length;
+    private final Vector[] genes;
     public DNA(int size) {
         length = size;
         genes = new Vector[length];
@@ -27,7 +26,9 @@ public class DNA {
     public Vector getGene(int i) {
         return genes[i];
     }
-
+    public void setGene(int i, Vector vector) {
+        this.genes[i] = vector;
+    }
     public int getLength() {
         return length;
     }
