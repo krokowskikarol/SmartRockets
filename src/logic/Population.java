@@ -15,7 +15,7 @@ import java.util.Random;
  * korzystamy, pola stale typu int oznaczajace wielkosc populacji, dlugosc jej
  * zycia oraz numer generacji ktora obecnie jest aktywna. Posiada ona takze pole
  * typu Vector reprezentujace punkt startowy dla rakiet znajdujacych sie w
- * populacji, pole typu ArrayList<> stanowiace pule wszystkich DNA z ktorych
+ * populacji, pole typu ArrayList stanowiace pule wszystkich DNA z ktorych
  * rozmnozona zostanie kolejna generacja, oraz oczywiscie tablice zawierajaca
  * kwszystkie rakiety wchodzace w sklad populacji
  *
@@ -135,7 +135,7 @@ public class Population {
      * Funkcja sprawdzajaca ile rakiet w populacji trafilo w cel sprawdza ile
      * rakiet w populacji posiada maksymana zdatnosc(maxFitness)
      *
-     * @return
+     * @return Liczba calkowita stanowiaca ilosc rakiet ktore osiagnely cel
      */
     public int checkHowManyHit() {
         int i = 0;
