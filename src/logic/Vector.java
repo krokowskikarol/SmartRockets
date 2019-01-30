@@ -34,8 +34,8 @@ public class Vector {
     /**
      * Konstruktor tworzacy wektor o sprecyzowanych wartosciach.
      *
-     * @param x Wspolrzedna x w przestrzeni 2D.
-     * @param y Wspolrzedna y w przestrzeni 2D.
+     * @param x Liczba calkowita reprezentujaca wspolrzedna x w przestrzeni 2D.
+     * @param y Liczba calkowita reprezentujaca wspolrzedna y w przestrzeni 2D.
      */
     public Vector(int x, int y) {
         this.x = x;
@@ -66,7 +66,7 @@ public class Vector {
     /**
      * Funkcja zwracajaca wspolrzedna x wektora
      *
-     * @return wspolrzedna x wektora
+     * @return Liczba calkowita stanowiaca wspolrzedna x wektora
      */
     public int getX() {
         return x;
@@ -75,7 +75,7 @@ public class Vector {
     /**
      * Funkcja zwracajaca wspolrzedna y wektora
      *
-     * @return wspolrzedna y wektora
+     * @return Liczba calkowita stanowiaca wspolrzedna y wektora
      */
     public int getY() {
         return y;
