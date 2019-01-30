@@ -2,10 +2,8 @@ package logic;
 
 import java.awt.Point;
 import java.awt.Rectangle;
-
 /**
- * Klasa reprezentująca pojedyńczą rakietę
- *
+ * 
  * @author kroko
  */
 public class Rocket {
@@ -13,10 +11,17 @@ public class Rocket {
     private final DNA dna;
     private final Rectangle shape;
     private final Vector position, acceleration, velocity;
-    private int fitness, maxFitness;
+    private int fitness;
+    private final int maxFitness;
     private boolean isAlive;
     private final Target target;
 
+    /**
+     * 
+     * @param lifeLength
+     * @param spawnPoint
+     * @param tar 
+     */
     public Rocket(int lifeLength, Vector spawnPoint, Target tar) {
         this.maxFitness = 100;
         target = tar;
