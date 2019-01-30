@@ -9,34 +9,34 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
-import logic.DNA;
 import logic.Population;
-import logic.Rocket;
 import logic.Target;
 
 /**
- *
+ * <h1>Glowna klasa programu</h1>
+ * Tutaj odbywa sie cala magia(prezentacja)
+ * 
  * @author kroko
  */
 public class SmartRockets extends JComponent implements ActionListener {
 
     public static Target tr = new Target(30);
     public Population pop = new Population(100, 60, tr);
-    String str;
-    public int statFit;
-
+   
     /**
+     * Funkcja main w ktorej teorzymy formatke, dodajemy cel dla rakiet 
+     * do formatki oraz tworzymy timer 
+     * 
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        // tworzenie formatki na ktorej bedzie wyswietlana symulacja
         SmartRockets symulation = new SmartRockets();
 
         JFrame window = new JFrame("Smart rockets");
@@ -46,8 +46,11 @@ public class SmartRockets extends JComponent implements ActionListener {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
         window.setBackground(Color.LIGHT_GRAY);
+        
+        //dodanie targetu do formatki
         window.add(tr);
 
+        //zainicjowanie i uruchomienie timera
         Timer t = new Timer(60, symulation);
         t.start();
 
@@ -75,22 +78,43 @@ public class SmartRockets extends JComponent implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
+        //w tym miejscu nastepuje sprawdzenie czy populacja jest ciagle
+        //zywa(count<lifespan) oraz aktualizacja jej stanu
         if (pop.isAlive()) {
             pop.update();
 
             repaint();
         } else {
+            // w wypadku gdy poprzednia populacja zakonczyla zywot 
+            // tworzymy na jej podstawie kolejna generacje rakiet
             pop = new Population(pop);
         }
 }
+    /**
+     * Funkcja rysujaca na formatce niezbedne dane ukazujace jak radzi sobie
+     * dana populacja rakiet. Danymi tymi sa:
+     * Count - konkretny krok dna na ktorym w danej chwili jestesmy,
+     * Generation - obecna generacja rakiet,
+     * Ilosc rakiet ktore trafily w okreslony cel
+     * Zdatnosc arbitralnie wybranej rakiety (w tym wypadku rakiety o indeksie 0)
+     * @param g2d Obiekt Graphics2D niezbedny do rysowania grafiki 
+     */
     public void drawStatisstics(Graphics2D g2d){
         g2d.setColor(Color.RED);
         g2d.drawString("Step : " + pop.getCount(), 50, 50);
         g2d.drawString("Generation : " + pop.getGeneration(), 50, 65);
-        g2d.drawString("Rockets that hit target : " + pop.checkHowManyHit() + "/" + pop.getPopSize(), 50, 95);
-        g2d.drawString("rocket 0 fitness : " + pop.getRocketFitness(0), 50, 110);
+        g2d.drawString("Rockets that hit target : " + pop.checkHowManyHit() + "/" + pop.getPopSize(), 50,80);
+        g2d.drawString("rocket 0 fitness : " + pop.getRocketFitness(0), 50, 95);
 
     }
+    /**
+     * Funkcja odpowiadjaca za rysowanie przebiegu symulacji.
+     * Rysuje wszystkie rakiety w formi 
+     * polprzezroczystej(w celu lepszej widocznosci)
+     * plus rakiete o indeksie 0 w osobnym nieprzezroczystym kolorze w celu
+     * latwiejszego sledzenia jej lotu
+     * @param g2d Obiekt Graphics2D niezbedny do rysowania grafiki 
+     */
     public void drawPopulation(Graphics2D g2d){
         int alpha = 127;
         Color back = new Color(0, 0, 0, alpha);
