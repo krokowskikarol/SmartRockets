@@ -217,6 +217,14 @@ public class Rocket {
     public int getFitness() {
         return fitness;
     }
+/**
+ * Zwraca makxFitness
+ * jej zadaniem jest zwrocic maksymalna zdatnosc jaka jest w stanie osiagnac rakieta
+ * @return Liczba calkowita okresclajaca maksymalna zdatnosc rakiety na rzecz ktorej zostala wywolana
+ */
+    public int getMaxFitness() {
+        return maxFitness;
+    }
 
     /**
      * Funkcja zwracajaca obiekt Shape stanowiacy ksztalt rakiety
