@@ -82,7 +82,6 @@ public class SmartRockets extends JComponent implements ActionListener {
         //zywa(count<lifespan) oraz aktualizacja jej stanu
         if (pop.isAlive()) {
             pop.update();
-
             repaint();
         } else {
             // w wypadku gdy poprzednia populacja zakonczyla zywot 
