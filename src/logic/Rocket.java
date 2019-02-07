@@ -13,7 +13,7 @@ import java.awt.Rectangle;
  *
  * @author kroko
  */
-public class Rocket {
+public class Rocket implements Cloneable{
 
     private final DNA dna;
     private final Rectangle shape;
@@ -33,13 +33,13 @@ public class Rocket {
      * @param spawnPoint Vector kreslajacy poczatkowa pozycje rakiety
      * @param tar Target cel do ktorego powinny dazyc rakiety
      */
-    public Rocket(int lifeLength, Vector spawnPoint, Target tar) {
+    public Rocket(int lifeLength, Vector spawnPoint, Target tar) throws CloneNotSupportedException {
         this.maxFitness = 100;
         target = tar;
         this.fitness = 0;
         this.isAlive = true;
         dna = new DNA(lifeLength);
-        position = spawnPoint;
+        position = (Vector)spawnPoint.clone();
         acceleration = new Vector(0, 0);
         velocity = new Vector(0, 0);
 
@@ -57,12 +57,12 @@ public class Rocket {
      * @param parentsGenes obiekt typu DNA reprezentujacy wygenerowane w
      * poprzedniej populacji DNA z 2 rodzicow;
      */
-    public Rocket(Rocket parent, DNA parentsGenes) {
+    public Rocket(Rocket parent, DNA parentsGenes) throws CloneNotSupportedException {
         this.maxFitness = parent.maxFitness;
         this.fitness = 0;
         this.isAlive = true;
         this.target = parent.target;
-        dna = parentsGenes;
+        dna = (DNA) parentsGenes.clone();
         // mutate();
         position = parent.position;
         shape = new Rectangle(position.getX(), position.getY(), 4, 15);

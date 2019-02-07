@@ -13,7 +13,7 @@ package logic;
  *
  * @author kroko
  */
-public class DNA {
+public class DNA implements Cloneable{
 
     private final int length;
     private final Vector[] genes;
@@ -72,4 +72,17 @@ public class DNA {
             System.out.println(genes[i].getX() + ";" + genes[i].getY());
         }
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        DNA newDna = new DNA(this.length);
+        
+        for (int i = 0; i < this.length; i++) {
+            newDna.genes[i] = (Vector) this.getGene(i).clone();
+        }
+        
+        return newDna;
+        
+    }
+    
 }

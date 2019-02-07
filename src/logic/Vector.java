@@ -15,7 +15,7 @@ import java.util.Random;
  * @author kroko
  *
  */
-public class Vector {
+public class Vector implements Cloneable {
 
     private int x, y;
     Random random = new Random(); //optionally, you can specify a seed, e.g. timestamp.
@@ -101,6 +101,13 @@ public class Vector {
         this.y = y;
     }
 
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    
+    }
+
+    
     /**
      * Funcja wyswietlajaca w konsoli wspolrzedne wektora
      */
